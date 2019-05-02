@@ -1,0 +1,15 @@
+xy.randomplot <- function(x, data, groups, number.of.groups=4) {
+  if (missing(groups))
+    stop("What is the name of the grouping variable? 
+         Try entering it as the third argument")
+  if (class(groups) != "character")
+    stop("arg:groups must be a character string 
+         containing a variable name")
+  arg1 <- x
+  list <- sample(unique(data[,groups]),size = number.of.groups)
+  newdata <- data.frame()
+  for (n in 1:number.of.groups) {
+    newdata <- rbind(newdata, data[data[,groups] == list[n],])
+  }
+  return(xyplot(arg1, newdata))
+}
